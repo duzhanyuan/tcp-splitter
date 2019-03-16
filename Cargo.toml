@@ -1,0 +1,5 @@
+[workspace]
+members = [
+    "tcp-splitter",
+    "tcp-splitter-cli",
+]

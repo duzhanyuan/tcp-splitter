@@ -1,0 +1,28 @@
+language: rust
+
+addons:
+  apt:
+    packages:
+      - musl-tools
+
+matrix:
+  include:
+    - os: linux
+      rust: nightly-2019-03-15
+      env: TARGET=x86_64-unknown-linux-musl
+
+script:
+  - rustup target add "${TARGET}"
+  - cargo build --target "${TARGET}" --release
+
+deploy:
+  provider: releases
+  api_key: "${GITHUB_TOKEN}"
+  file: "target/${TARGET}/release/tcp-splitter"
+  skip_cleanup: true
+  on:
+    tags: true
+
+notifications:
+  email:
+    on_success: never
