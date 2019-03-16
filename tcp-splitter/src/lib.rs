@@ -19,7 +19,7 @@ use crate::server::acceptor::run_acceptor;
 const BUFFER_SIZE: usize = 65535;
 
 type SharedBuffer = Arc<([u8; BUFFER_SIZE], usize)>;
-type SnifferTx = mpsc::UnboundedSender<SharedBuffer>;
+type SnifferTx = mpsc::Sender<SharedBuffer>;
 type SnifferTxs = Arc<Mutex<HashMap<SocketAddr, SnifferTx>>>;
 
 /// Run "tcp-splitter".

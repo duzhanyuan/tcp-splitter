@@ -2,7 +2,7 @@ use log::*;
 use std::net::Shutdown;
 use std::net::SocketAddr;
 
-use futures::sync::mpsc::UnboundedReceiver;
+use futures::sync::mpsc::Receiver;
 use tokio::net::TcpStream;
 
 use crate::proxy::proxy_logger::ProxyLogger;
@@ -14,7 +14,7 @@ use super::upstream::upstream;
 pub async fn handle_sniffer(
     sniffer_addr: SocketAddr,
     proxy_state: ProxyState,
-    rx: UnboundedReceiver<SharedBuffer>,
+    rx: Receiver<SharedBuffer>,
 ) {
     let sniffer = match await!(TcpStream::connect(&sniffer_addr)) {
         Ok(s) => {

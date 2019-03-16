@@ -16,7 +16,7 @@ pub async fn splitted_upstream(
     proxied: ProxyStream,
     sniffer_txs: SnifferTxs,
 ) -> io::Result<()> {
-    let (tx, rx) = mpsc::unbounded();
+    let (tx, rx) = mpsc::channel(10);
     tokio::spawn_async(
         async move {
             if let Err(e) = await!(upstream(proxied, rx)) {
@@ -31,12 +31,12 @@ pub async fn splitted_upstream(
             n => {
                 let buf = Arc::new((buf, n));
 
-                if let Err(e) = tx.unbounded_send(buf.clone()) {
+                if let Err(e) = await!(tx.clone().send(buf.clone())) {
                     trace!("Channel already gone: {:?}", e);
                 }
                 let sniffer_txs = sniffer_txs.lock().unwrap();
                 for (_, tx) in sniffer_txs.iter() {
-                    if let Err(e) = tx.unbounded_send(buf.clone()) {
+                    if let Err(e) = tx.clone().try_send(buf.clone()) {
                         trace!("Channel already gone: {:?}", e);
                     }
                 }
