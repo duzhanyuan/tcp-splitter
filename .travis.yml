@@ -13,6 +13,7 @@ matrix:
 
 script:
   - rustup target add "${TARGET}"
+  - cargo test --target "${TARGET}"
   - cargo build --target "${TARGET}" --release
 
 deploy:
