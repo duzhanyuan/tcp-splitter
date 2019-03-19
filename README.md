@@ -33,7 +33,7 @@ Bence SZIGETI <bence.szigeti@gohyda.com>
 TCP proxy server with the ability to copy clients upstream to sniffer servers.
 
 USAGE:
-    tcp-splitter-cli [OPTIONS] --listen <listen address> --proxied <proxied server address>
+    tcp-splitter [OPTIONS] --listen <listen address> --proxied <proxied server address>
 
 FLAGS:
     -h, --help       Prints help information
