@@ -28,7 +28,7 @@ guarantees.**
 
 ```
 $ ./tcp-splitter --help
-tcp-splitter v0.1.0-rc0
+tcp-splitter v0.1.0-rc1
 Bence SZIGETI <bence.szigeti@gohyda.com>
 TCP proxy server with the ability to copy clients upstream to sniffer servers.
 

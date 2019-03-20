@@ -1,6 +1,6 @@
 [package]
 name = "tcp-splitter"
-version = "0.1.0-rc0"
+version = "0.1.0-rc1"
 authors = ["Bence SZIGETI <bence.szigeti@gohyda.com>"]
 edition = "2018"
 description = """
